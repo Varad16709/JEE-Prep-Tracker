@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="Your personal JEE Main 2027 study tracker">
+  <title>JEE Prep Tracker | JEE Main 2027</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#">
+        <span class="brand-icon">J</span>
+        <span>JEE Prep<span class="brand-muted">Tracker</span></span>
+      </a>
+
+      <p class="nav-label">WORKSPACE</p>
+
+      <nav class="navigation">
+        <button class="nav-item active" data-view="dashboard">▦ <span>Dashboard</span></button>
+        <button class="nav-item" data-view="plan">☑ <span>Daily Tasks</span></button>
+        <button class="nav-item" data-view="calendar">▦ <span>75-Day Calendar</span></button>
+        <button class="nav-item" data-view="statistics">▥ <span>Statistics</span></button>
+        <button class="nav-item" data-view="timer">◷ <span>Study Timer</span></button>
+        <button class="nav-item" data-view="notes">▤ <span>My Notes</span></button>
+        <button class="nav-item" data-view="study-library">📚 <span>Study Notes &amp; Formulas</span></button>
+        <button class="nav-item" data-view="mock-tests">📝 <span>Mock Tests</span></button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="sync-status">
+          <span class="status-dot"></span>
+          <div>
+            <strong id="syncLabel">Not connected</strong>
+            <small id="syncDescription">Firebase setup pending</small>
+          </div>
+        </div>
+
+        <button id="syncCodeButton" class="secondary-button full-width">
+          Connect with sync code
+        </button>
+
+        <p class="sidebar-foot">JEE MAIN 2027 · 75-DAY PLAN</p>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button
+          id="menuButton"
+          class="icon-button mobile-menu"
+          aria-label="Open menu"
+          aria-expanded="false"
+        >☰</button>
+
+        <div>
+          <p class="eyebrow">YOUR PERSONAL STUDY SPACE</p>
+          <h1 id="pageTitle">Dashboard</h1>
+        </div>
+
+        <div class="topbar-right">
+          <span class="date-label" id="todayLabel"></span>
+          <div class="avatar" title="JEE Student">J</div>
+        </div>
+      </header>
+
+      <section class="welcome-row">
+        <div>
+          <h2 id="greeting">Small steps. Big results.</h2>
+          <p>Build consistency, one study session at a time.</p>
+        </div>
+
+        <button class="primary-button" id="continueButton">
+          Continue studying →
+        </button>
+      </section>
+
+      <section class="stats-grid" aria-label="Study overview">
+        <article class="stat-card">
+          <span class="stat-icon blue">◷</span>
+          <p>Today's study target</p>
+          <strong>6 <small>hours</small></strong>
+          <span class="stat-caption">2 hours per subject</span>
+        </article>
+
+        <article class="stat-card">
+          <span class="stat-icon purple">☑</span>
+          <p>Tasks completed</p>
+          <strong id="completedCount">0</strong>
+          <span class="stat-caption" id="taskCaption">Start with today's tasks</span>
+        </article>
+
+        <article class="stat-card">
+          <span class="stat-icon green">▥</span>
+          <p>Plan progress</p>
+          <strong id="overallProgress">0%</strong>
+          <span class="stat-caption">Across the 75-day plan</span>
+        </article>
+
+        <article class="stat-card">
+          <span class="stat-icon orange">🔥</span>
+          <p>Study streak</p>
+          <strong id="streakCount">0 <small>days</small></strong>
+          <span class="stat-caption">Keep showing up</span>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel daily-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">YOUR PLAN</p>
+              <h3 id="dayHeading">Today's Study Plan</h3>
+            </div>
+
+            <button class="text-button" id="viewAllTasks">
+              View all →
+            </button>
+          </div>
+
+          <div class="day-progress-row">
+            <span id="dayProgressText">0 of 0 tasks completed</span>
+            <strong id="dayProgressPercent">0%</strong>
+          </div>
+
+          <div class="progress-track">
+            <div class="progress-fill" id="dayProgressBar"></div>
+          </div>
+
+          <div id="dashboardTasks" class="task-list">
+            <div class="empty-state">Your daily tasks will appear here.</div>
+          </div>
+        </article>
+
+        <article class="panel subject-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">6 HOURS DAILY</p>
+              <h3>Subject Breakdown</h3>
+            </div>
+          </div>
+
+          <div class="subject-row">
+            <div class="subject-symbol physics">P</div>
+            <div class="subject-details">
+              <div>
+                <strong>Physics</strong>
+                <span>2 hours</span>
+              </div>
+              <div class="mini-track">
+                <div class="mini-fill physics-fill" id="physicsBar"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="subject-row">
+            <div class="subject-symbol chemistry">C</div>
+            <div class="subject-details">
+              <div>
+                <strong>Chemistry</strong>
+                <span>2 hours</span>
+              </div>
+              <div class="mini-track">
+                <div class="mini-fill chemistry-fill" id="chemistryBar"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="subject-row">
+            <div class="subject-symbol maths">M</div>
+            <div class="subject-details">
+              <div>
+                <strong>Mathematics</strong>
+                <span>2 hours</span>
+              </div>
+              <div class="mini-track">
+                <div class="mini-fill maths-fill" id="mathsBar"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tip-box">
+            <span>✦</span>
+            <div>
+              <strong>Focus tip</strong>
+              <p>Understand concepts first, practise questions next, then review your mistakes.</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel view-panel" id="activeView">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">YOUR STUDY JOURNEY</p>
+            <h3 id="viewHeading">Daily Tasks</h3>
+          </div>
+
+          <select id="daySelector" aria-label="Select study day"></select>
+        </div>
+
+        <div id="viewContent"></div>
+      </section>
+
+      <footer class="app-footer">
+        <span>JEE Prep Tracker</span>
+        <span>Consistency over perfection.</span>
+      </footer>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
